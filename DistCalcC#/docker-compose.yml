@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  distcalc:
+    image: ${DOCKER_REGISTRY}distcalc
+    build:
+      context: .
+      dockerfile: DistCalc\Dockerfile

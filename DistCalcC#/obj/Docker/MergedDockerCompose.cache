@@ -1,0 +1,15 @@
+networks:
+  default:
+    external:
+      name: nat
+services:
+  distcalc:
+    build:
+      context: C:\git\DistCalc
+      dockerfile: DistCalc\Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    image: distcalc
+    ports:
+    - target: 80
+version: '3.4'
