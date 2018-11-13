@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  namespace: default
+  name: add
+  labels:
+    app: add
+spec:
+  replicas: 2
+  
+  selector: 
+    matchLabels:
+      app: add
+    
+  template:
+    metadata:
+      labels:
+        app: add
+    spec:
+      containers:
+      - name: add-image
+        image: add-image-node
+        ports:
+        - containerPort: 3000
+        imagePullPolicy: IfNotPresent
+

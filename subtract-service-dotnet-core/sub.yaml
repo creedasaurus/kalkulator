@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  namespace: default
+  name: subtract
+  labels:
+    app: subtract
+spec:
+  replicas: 2
+  
+  selector: 
+    matchLabels:
+      app: subtract
+    
+  template:
+    metadata:
+      labels:
+        app: subtract
+    spec:
+      containers:
+      - name: sub-image
+        image: sub-image-core
+        ports:
+        - containerPort: 5000
+        imagePullPolicy: IfNotPresent
+

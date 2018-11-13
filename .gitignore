@@ -1,4 +1,11 @@
+# Node
 node_modules
+
+# VS Code
+.idea
+.vscode
+
+# builds
 bin
 obj
 published
