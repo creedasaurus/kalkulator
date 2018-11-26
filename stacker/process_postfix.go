@@ -71,7 +71,6 @@ func processOperator(nextOperator string, operators *stack, operands *floatStack
 		}
 
 		topPrec := opPrecedence[top]
-
 		if nextPrecValue > topPrec {
 			break
 		}

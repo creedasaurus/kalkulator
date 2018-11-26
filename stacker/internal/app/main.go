@@ -81,7 +81,7 @@ func main() {
 }
 
 type ComputeRequest struct {
-	Algorithm string `json:"algorithm"`
+	Expression string `json:"expression"`
 }
 
 type ComputeResponse struct {
@@ -101,7 +101,7 @@ func handleCompute(w http.ResponseWriter, r *http.Request) {
 	t := time.NewTimer(time.Second * 3)
 	<-t.C
 
-	ans, err := stacker.ProcessStatement(algo.Algorithm)
+	ans, err := stacker.ProcessStatement(algo.Expression)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
