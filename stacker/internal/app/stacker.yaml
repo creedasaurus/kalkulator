@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: default
+  name: stacker
+  labels:
+    run: stacker
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+  selector:
+    run: stacker
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  namespace: default
+  name: stacker
+  labels:
+    app: stacker
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: stacker
+
+  template:
+    metadata:
+      labels:
+        app: stacker
+    spec:
+      containers:
+      - name: stacker-image
+        image: stacker-image-go:latest
+        ports:
+          - containerPort: 8080
+        imagePullPolicy: IfNotPresent
+

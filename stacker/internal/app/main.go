@@ -13,6 +13,9 @@ import (
 	"github.com/creedasaurus/kalkulator/stacker"
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
+	"github.com/opentracing/opentracing-go"
+	"github.com/uber/jaeger-client-go"
+	"github.com/uber/jaeger-client-go/config"
 )
 
 var (
@@ -21,6 +24,25 @@ var (
 
 func main() {
 	ctx, cancelFunc := context.WithCancel(context.Background())
+	cfg := config.Configuration{
+		ServiceName: "stacker",
+		Sampler: &config.SamplerConfig{
+			Type:  "const",
+			Param: 1,
+		},
+		Reporter: &config.ReporterConfig{
+			LogSpans:            true,
+			BufferFlushInterval: 1 * time.Second,
+		},
+	}
+	tracer, closer, err := cfg.NewTracer(config.Logger(jaeger.StdLogger))
+	if err != nil {
+		fmt.Printf("Cannot create tracer: %v\n", err.Error())
+		os.Exit(1)
+	}
+	defer closer.Close()
+
+	opentracing.SetGlobalTracer(tracer)
 
 	signalChannel := make(chan os.Signal, 1)
 	signal.Notify(signalChannel, syscall.SIGQUIT, syscall.SIGTERM, syscall.SIGINT, syscall.SIGHUP)
