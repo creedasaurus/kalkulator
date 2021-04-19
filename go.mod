@@ -6,7 +6,7 @@ require (
 	github.com/opentracing-contrib/examples v0.0.0-20180916152149-18560265578a // indirect
 	github.com/opentracing/opentracing-go v1.1.0
 	github.com/pkg/errors v0.8.0 // indirect
-	github.com/uber/jaeger-client-go v2.21.1+incompatible
+	github.com/uber/jaeger-client-go v2.26.0+incompatible
 	github.com/uber/jaeger-lib v1.5.0 // indirect
 	golang.org/x/net v0.0.0-20181114220301-adae6a3d119a // indirect
 )
